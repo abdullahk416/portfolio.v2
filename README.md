@@ -2,8 +2,6 @@
 
 A modern, performant portfolio website showcasing software engineering expertise, projects, and technical skills. Built with cutting-edge web technologies and focused on clean design, smooth animations, and excellent user experience.
 
-**[Live Demo](https://abdullahkhan.dev)** | **[GitHub Repository](https://github.com/abdullahk416/Portfolio.V2)**
-
 ---
 
 ## 🎯 Features
@@ -66,54 +64,6 @@ portfolio/
 | **Fonts** | [Geist](https://vercel.com/font), [Instrument Serif](https://fonts.google.com/) |
 | **Build** | Webpack (via Next.js) |
 
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- **Node.js** ≥ 18.x
-- **npm** or **yarn** package manager
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/abdullahk416/Portfolio.V2.git
-cd Portfolio
-
-# Install dependencies
-npm install
-```
-
-### Development
-
-```bash
-# Start the development server (runs on http://localhost:3000)
-npm run dev
-
-# Open http://localhost:3000 in your browser
-```
-
-### Production Build
-
-```bash
-# Build for production
-npm run build
-
-# Start production server
-npm start
-```
-
----
-
-## 📜 Available Scripts
-
-```bash
-npm run dev     # Start development server with hot reload
-npm run build   # Build optimized production bundle
-npm start       # Run production server
-```
 
 ---
 
@@ -139,22 +89,6 @@ Built with performance best practices:
 
 ---
 
-## 🔧 Configuration
-
-### Tailwind CSS
-
-Customize theme in `tailwind.config.ts`:
-```typescript
-export default {
-  theme: {
-    extend: {
-      colors: { /* ... */ },
-      fontSize: { /* ... */ },
-    },
-  },
-}
-```
-
 ### TypeScript
 
 Configuration available in `tsconfig.json` with strict mode enabled.
@@ -170,46 +104,6 @@ To personalize the portfolio:
 3. **Modify projects** in `components/Projects.tsx`
 4. **Update experience** in `components/Experience.tsx`
 5. **Change colors** in `tailwind.config.ts` and component files
-
----
-
-## 🌍 Deployment
-
-### Vercel (Recommended)
-
-```bash
-# Deploy with Vercel CLI
-npm i -g vercel
-vercel
-```
-
-Or connect your GitHub repository to Vercel dashboard for automatic deployments.
-
-### Other Platforms
-
-The project can be deployed to any Node.js hosting platform:
-- **Netlify**
-- **AWS Amplify**
-- **Azure Static Web Apps**
-- **Self-hosted servers**
-
----
-
-## 📄 License
-
-This project is open source and available under the MIT License. See the LICENSE file for details.
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to open issues and submit pull requests.
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ---
 
