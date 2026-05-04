@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Abdullah Khan — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#0a0a0a',
+          'ink-2': '#111111',
+          loud: '#fafafa',
+          normal: 'rgba(250,250,250,0.78)',
+          muted: 'rgba(250,250,250,0.62)',
+          dim: 'rgba(250,250,250,0.38)',
+          hairline: 'rgba(255,255,255,0.10)',
+          'hairline-strong': 'rgba(255,255,255,0.20)',
+          azure: '#fafafa',
+          ice: '#fafafa',
+        },
+        fontFamily: {
+          sans: ['Geist', 'system-ui', 'sans-serif'],
+          serif: ['"Instrument Serif"', 'serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+      }
+    }
+  }
+</script>
+<style>
+  :root{
+    --dark-background:#0a0a0a;
+    --body-loud:#fafafa;
+    --body-normal:rgba(250,250,250,0.78);
+    --body-muted:rgba(250,250,250,0.62);
+    --gradient-loud:linear-gradient(0deg,#fafafa 0%,#d4d4d4 100%);
+    --gradient-subdued:linear-gradient(0deg,#fafafa1f 0%,#a3a3a31f 100%);
+    --hairline:rgba(255,255,255,0.10);
+    --hairline-strong:rgba(255,255,255,0.20);
+  }
+  *{ -webkit-font-smoothing:antialiased; text-rendering:optimizelegibility; }
+  html,body{ background:var(--dark-background); color:var(--body-loud); font-family:'Geist',system-ui,sans-serif; }
+  html{ scroll-behavior:smooth; }
+  body{ overflow-x:hidden; }
+  ::selection{ background:rgba(255,255,255,0.18); color:#fff; }
+
+  /* Grain overlay */
+  .grain::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:60;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity:.5; mix-blend-mode:overlay;
+  }
+
+  /* Top spotlight (neutral) */
+  .spotlight{
+    position:absolute; left:50%; top:-120px; transform:translateX(-50%);
+    width:1200px; height:900px; pointer-events:none; opacity:.9;
+    background:
+      radial-gradient(35% 80% at 49% 0%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 40%, rgba(10,10,10,0) 75%);
+    filter:blur(2px);
+  }
+  .floor-glow{
+    position:absolute; left:50%; bottom:-200px; transform:translateX(-50%);
+    width:1400px; height:600px; pointer-events:none;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,0.06) 0%, rgba(10,10,10,0) 70%);
+  }
+
+  /* Vertical hairlines flanking content */
+  .rule-grid{
+    position:absolute; inset:0; pointer-events:none;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.18) 1px, transparent 1px),
+      linear-gradient(to right, rgba(255,255,255,0.18) 1px, transparent 1px);
+    background-position: calc(50% - 320px) 0, calc(50% + 320px) 0;
+    background-size: 1px 100%;
+    background-repeat: no-repeat;
+  }
+  @media (min-width:1024px){
+    .rule-grid{
+      background-position: calc(50% - 480px) 0, calc(50% + 480px) 0;
+    }
+  }
+
+  /* Section hairline + corner ticks */
+  .hr{ height:1px; background:var(--hairline); position:relative; }
+  .hr::before,.hr::after{
+    content:""; position:absolute; top:50%; width:7px; height:7px; transform:translate(-50%,-50%);
+    background-image:
+      linear-gradient(var(--hairline-strong),var(--hairline-strong)),
+      linear-gradient(var(--hairline-strong),var(--hairline-strong));
+    background-size: 7px 1px, 1px 7px; background-position:center; background-repeat:no-repeat;
+  }
+  .hr::before{ left:calc(50% - 480px); }
+  .hr::after{ left:calc(50% + 480px); }
+  @media (max-width:1023px){
+    .hr::before{ left:24px; } .hr::after{ left:auto; right:24px; transform:translate(50%,-50%); }
+  }
+
+  /* Headline */
+  .display{
+    font-family:'Geist',system-ui,sans-serif;
+    font-weight:500;
+    letter-spacing:-0.045em;
+    line-height:0.92;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .display-grad{
+    background: linear-gradient(180deg, #f5f9ff 0%, #fafafa 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* Pill / chip */
+  .pill{
+    display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px;
+    border:1px solid var(--hairline-strong); background:rgba(255,255,255,0.04);
+    font-size:12px; color:var(--body-loud); letter-spacing:0.02em;
+    backdrop-filter: blur(8px);
+  }
+  .pill-dot{ width:6px; height:6px; border-radius:999px; background:#fafafa; box-shadow:0 0 8px #fafafa; }
+
+  /* CTA */
+  .cta{
+    position:relative; display:inline-flex; align-items:center; gap:8px; padding:9px 16px; border-radius:999px;
+    border:1px solid rgba(255,255,255,0.5); background:linear-gradient(180deg,#fafafa 0%, #d4d4d4 100%); color:#0a0a0a;
+    font-weight:500; font-size:13px; letter-spacing:-0.01em;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.18) inset, 0 8px 30px rgba(255,255,255,0.18);
+    transition: transform 220ms cubic-bezier(.2,.7,.2,1), box-shadow 220ms cubic-bezier(.2,.7,.2,1);
+  }
+  .cta:hover{ transform:translateY(-1px); box-shadow:0 0 0 1px rgba(255,255,255,0.28) inset, 0 12px 40px rgba(255,255,255,0.32); }
+  .cta:active{ transform:translateY(0); }
+  .cta:focus-visible{ outline:none; box-shadow:0 0 0 2px #0a0a0a, 0 0 0 4px #fafafa; }
+
+  .ghost{
+    position:relative; display:inline-flex; align-items:center; gap:8px; padding:9px 16px; border-radius:999px;
+    border:1px solid var(--hairline-strong); color:var(--body-loud);
+    font-weight:500; font-size:13px;
+    transition: transform 220ms cubic-bezier(.2,.7,.2,1), background-color 220ms cubic-bezier(.2,.7,.2,1), border-color 220ms;
+    background: rgba(255,255,255,0.03);
+  }
+  .ghost:hover{ background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.36); transform:translateY(-1px); }
+  .ghost:focus-visible{ outline:none; box-shadow:0 0 0 2px #0a0a0a, 0 0 0 4px #fafafa; }
+
+  /* Layered card window */
+  .window{
+    position:relative; border-radius:14px; overflow:hidden;
+    background: linear-gradient(180deg, rgba(20,20,20,0.92) 0%, rgba(14,14,14,0.92) 100%);
+    border:1px solid var(--hairline-strong);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.04),
+      0 30px 80px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(255,255,255,0.04);
+  }
+  .window-bar{
+    height:34px; display:flex; align-items:center; gap:6px; padding:0 12px;
+    border-bottom:1px solid var(--hairline);
+    background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+  }
+  .dot{ width:9px; height:9px; border-radius:999px; background:rgba(255,255,255,0.18); }
+
+  /* Center hero card glow */
+  .glow-ring{
+    position:absolute; inset:-40px; border-radius:24px; pointer-events:none;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,0.22) 0%, rgba(5,6,15,0) 70%);
+    filter:blur(8px);
+  }
+
+  /* Tech tile chip */
+  .tech-tile{
+    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;
+    padding:14px 10px; border-radius:10px;
+    border:1px solid var(--hairline);
+    background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+    color:var(--body-normal);
+    font-size:11px; letter-spacing:0.01em;
+    transition: transform 240ms cubic-bezier(.2,.7,.2,1), border-color 240ms, background-color 240ms;
+  }
+  .tech-tile:hover{ transform:translateY(-2px); border-color:var(--hairline-strong); background:rgba(255,255,255,0.06); }
+
+  /* Card with subtle interior glow */
+  .card{
+    position:relative; border-radius:14px; padding:22px;
+    border:1px solid var(--hairline);
+    background:
+      radial-gradient(120% 60% at 50% 0%, rgba(255,255,255,0.06) 0%, rgba(5,6,15,0) 70%),
+      linear-gradient(180deg, rgba(20,20,20,0.6) 0%, rgba(14,14,14,0.6) 100%);
+    overflow:hidden;
+  }
+  .card::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background: radial-gradient(140% 70% at 50% 110%, rgba(255,255,255,0.08) 0%, rgba(5,6,15,0) 60%);
+  }
+
+  /* Editorial intro tag */
+  .tag{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--body-muted); font-size:13px; letter-spacing:0.02em;
+  }
+  .tag .arrow{ width:14px; height:1px; background:var(--body-muted); position:relative; }
+  .tag .arrow::after{
+    content:""; position:absolute; right:0; top:50%; transform:translateY(-50%) rotate(45deg);
+    width:5px; height:5px; border-top:1px solid var(--body-muted); border-right:1px solid var(--body-muted);
+  }
+
+  /* Diamond core */
+  .diamond{
+    width:96px; height:96px; transform:rotate(45deg);
+    border-radius:14px;
+    background:
+      radial-gradient(60% 60% at 50% 50%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.05) 100%);
+    border:1px solid rgba(255,255,255,0.5);
+    box-shadow:
+      inset 0 0 30px rgba(255,255,255,0.4),
+      inset 0 0 60px rgba(255,255,255,0.4),
+      0 0 60px rgba(255,255,255,0.45),
+      0 0 120px rgba(255,255,255,0.25);
+    position:relative;
+  }
+  .diamond::after{
+    content:""; position:absolute; inset:8px; border-radius:10px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 100%);
+    mix-blend-mode:overlay;
+  }
+
+  /* Circuit dotted bg */
+  .circuit-bg{
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+    -webkit-mask-image: radial-gradient(80% 80% at 50% 50%, #000 40%, transparent 100%);
+            mask-image: radial-gradient(80% 80% at 50% 50%, #000 40%, transparent 100%);
+  }
+
+  /* Connection lines decorative */
+  .line-h{ height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); }
+  .line-v{ width:1px; background:linear-gradient(180deg, transparent, rgba(255,255,255,0.4), transparent); }
+
+  /* Stagger reveal */
+  @keyframes rise {
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .rise{ opacity:0; animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards; }
+
+  /* Project sub-card mock */
+  .mock-line{ height:8px; border-radius:3px; background:rgba(255,255,255,0.12); }
+  .mock-line.short{ width:55%; }
+  .mock-line.mid{ width:75%; }
+  .mock-line.long{ width:90%; }
+  .mock-input{
+    height:34px; border-radius:8px; border:1px solid var(--hairline);
+    background:rgba(255,255,255,0.04); display:flex; align-items:center; padding:0 10px;
+    color:var(--body-muted); font-size:11px;
+  }
+  .mock-btn{
+    height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    color:#0a0a0a; font-size:12px; font-weight:500;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.2) inset, 0 6px 18px rgba(255,255,255,0.25);
+  }
+
+  /* Hover lift for project cards */
+  .lift{ transition: transform 280ms cubic-bezier(.2,.7,.2,1), border-color 280ms; }
+  .lift:hover{ transform:translateY(-3px); border-color:var(--hairline-strong); }
+
+  /* Marquee-ish row of skill icons static */
+  .skill-icon{
+    width:36px; height:36px; border-radius:8px;
+    border:1px solid var(--hairline);
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+    display:flex; align-items:center; justify-content:center; color:var(--body-loud);
+  }
+
+  /* Footer light switch */
+  .switch{
+    width:60px; height:28px; border-radius:999px;
+    border:1px solid var(--hairline-strong); background:rgba(255,255,255,0.04);
+    display:flex; align-items:center; padding:2px;
+  }
+  .switch .knob{
+    width:22px; height:22px; border-radius:999px;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    box-shadow: 0 0 16px rgba(255,255,255,0.6);
+    margin-left:auto;
+  }
+
+  /* Circuit node */
+  .node{
+    border-radius:10px; border:1px solid var(--hairline);
+    background: linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
+    padding:10px 12px; display:flex; align-items:center; gap:8px;
+    color:var(--body-loud); font-size:12px;
+    backdrop-filter: blur(6px);
+  }
+  .node .swatch{ width:18px; height:18px; border-radius:5px; border:1px solid var(--hairline-strong); }
+
+  /* Button anim hover */
+  a, button{ outline:none; }
+
+  /* Hide horizontal scrollbar artifacts */
+  body::-webkit-scrollbar{ width:0; }
+
+  /* Plus mark */
+  .plus{ position:absolute; width:9px; height:9px; pointer-events:none;
+    background:
+      linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),
+      linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4));
+    background-size:9px 1px,1px 9px; background-position:center; background-repeat:no-repeat;
+    transform:translate(-50%,-50%);
+  }
+
+  /* Hero faded vertical rails — mask fades them out at the bottom (component pattern) */
+  .hero-rail{
+    background:rgba(255,255,255,0.15);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 25%, #000 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 25%, #000 80%, transparent 100%);
+  }
+
+  /* shadcn-style buttons */
+  .btn-primary{
+    display:inline-flex; align-items:center; justify-content:center;
+    height:44px; padding:0 22px; border-radius:999px;
+    background:#fafafa; color:#0a0a0a;
+    font-size:14px; font-weight:500; letter-spacing:-0.01em;
+    transition: background-color 200ms ease, transform 200ms ease;
+  }
+  .btn-primary:hover{ background:rgba(250,250,250,0.9); transform:translateY(-1px); }
+  .btn-primary:active{ transform:translateY(0); }
+  .btn-primary:focus-visible{ outline:none; box-shadow:0 0 0 2px #0a0a0a, 0 0 0 4px #fafafa; }
+
+  .btn-secondary{
+    display:inline-flex; align-items:center; justify-content:center;
+    height:44px; padding:0 22px; border-radius:999px;
+    background:rgba(255,255,255,0.08); color:#fafafa;
+    border:1px solid rgba(255,255,255,0.10);
+    font-size:14px; font-weight:500; letter-spacing:-0.01em;
+    transition: background-color 200ms ease, transform 200ms ease;
+  }
+  .btn-secondary:hover{ background:rgba(255,255,255,0.12); transform:translateY(-1px); }
+  .btn-secondary:active{ transform:translateY(0); }
+  .btn-secondary:focus-visible{ outline:none; box-shadow:0 0 0 2px #0a0a0a, 0 0 0 4px #fafafa; }
+
+  /* Logo marquee */
+  .marquee-mask{
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .marquee{ animation: marquee-scroll 45s linear infinite; padding-right:42px; }
+  .marquee:hover{ animation-play-state: paused; }
+  .logo-item{
+    display:inline-flex; align-items:center; gap:10px; flex-shrink:0;
+    color:rgba(250,250,250,0.78);
+    font-size:15px; font-weight:500; letter-spacing:-0.01em;
+    opacity:.78; transition: opacity 200ms ease;
+  }
+  .logo-item:hover{ opacity:1; }
+  .logo-item img{ filter: brightness(0) invert(1); opacity:.85; }
+</style>
+</head>
+<body class="grain">
+
+<!-- ============ NAV ============ -->
+<header class="relative z-40">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12 h-[72px] flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2 text-loud" aria-label="Abdullah Khan">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 20 L12 4 L21 20 Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        <path d="M7.5 14 H16.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <span class="text-[14px] tracking-[-0.01em] font-medium">Abdullah Khan</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-7 text-[13px] text-normal">
+      <a href="#work" class="hover:text-loud transition-colors duration-200">Work</a>
+      <a href="#projects" class="hover:text-loud transition-colors duration-200">Projects</a>
+      <a href="#stack" class="hover:text-loud transition-colors duration-200">Stack</a>
+      <a href="#contact" class="hover:text-loud transition-colors duration-200">Contact</a>
+    </div>
+
+    <a href="/Abdullah_Khan_Resume.pdf" class="cta" target="_blank" rel="noopener">
+      Resume
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+  <div class="hr"></div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="relative overflow-hidden">
+  <div class="spotlight"></div>
+
+  <div class="relative mx-auto w-full max-w-5xl">
+    <div class="relative flex flex-col items-center justify-center gap-5 px-6 pt-32 pb-24 text-center">
+      <!-- Announcement pill -->
+      <a href="#projects" class="rise group flex w-fit items-center gap-3 rounded-full border border-hairline-strong bg-[rgba(255,255,255,0.04)] px-3 py-1 backdrop-blur-md hover:bg-[rgba(255,255,255,0.07)] transition-colors duration-300" style="animation-delay:.5s">
+        <svg class="size-3 text-muted" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4.5 16.5l3 3M9 9l6 6M14.5 4.5c2 0 5 1 5 5 0 5-7.5 12.5-12.5 12.5 0 0-1-3-3-3 0-5 7.5-12.5 12.5-12.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="14.5" cy="9.5" r="1.2" fill="currentColor"/>
+        </svg>
+        <span class="text-xs text-loud">open to SWE internships &amp; new grad roles</span>
+        <span class="block h-5 border-l border-hairline-strong"></span>
+        <svg class="size-3 text-loud transition-transform duration-150 ease-out group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+      <!-- Headline -->
+      <h1 class="display rise text-balance text-6xl tracking-tight md:text-7xl lg:text-8xl" style="animation-delay:.1s; line-height:1.0;">
+        Abdullah Khan
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="rise mx-auto max-w-xl text-base tracking-wider text-normal sm:text-lg md:text-xl" style="animation-delay:.2s; line-height:1.5;">
+        Software engineer building things people <br class="hidden sm:block"/> actually use — across web, .NET, and AI.
+      </p>
+
+      <!-- CTAs -->
+      <div class="rise flex flex-row flex-wrap items-center justify-center gap-3 pt-2" style="animation-delay:.3s">
+        <a href="mailto:abdullah.khan14@ontariotechu.net" class="btn-secondary">
+          <svg class="size-4 mr-2" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 4h3l2 5-2.5 1.5a11 11 0 005 5L14 13l5 2v3a2 2 0 01-2 2A14 14 0 014 6a2 2 0 011-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+          Get in touch
+        </a>
+        <a href="#projects" class="btn-primary">
+          See my work
+          <svg class="size-4 ms-2" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hr"></div>
+</section>
+
+<!-- ============ TECH STACK LOGO MARQUEE ============ -->
+<section class="relative space-y-4 pt-8 pb-12">
+  <h2 class="text-center font-medium text-lg text-muted tracking-tight md:text-xl">
+    My toolkit · <span class="text-loud">the stack I ship with</span>
+  </h2>
+  <div class="relative z-10 mx-auto max-w-4xl">
+    <div class="overflow-hidden py-4 marquee-mask">
+      <div class="marquee flex w-max items-center" style="gap:42px;">
+        <div class="logo-item"><img src="https://cdn.simpleicons.org/typescript/fafafa" alt="TypeScript" class="h-5 w-5"/><span>TypeScript</span></div>
+        <div class="logo-item"><img src="https://cdn.simpleicons.org/react/fafafa" alt="React" class="h-5 w-5"/><span>React</span></div>
+        <div class="logo-item"><img src="https://cdn.simpleicons.org/nextdotjs/fafafa" alt="Next.js" class="h-5 w-5"/><span>Next.js</span></div>
+        <div class="logo-item"><img src="https://cdn.simpleicons.org/python/fafafa" alt="Python" class="h-5 w-5"/><span>Python</span></div>
+        <div class="logo-item"><img src="https://cdn.simpleicons.org/dotnet/fafafa" alt=".NET" class="h-5 w-5"/><span>.NET</span></div>
+        <div class="logo-item"><img src="https://cdn.simpleicons.org/amazonaws/fafafa" alt="AWS" class="h-5 w-5"/><span>AWS</span></div>
+        <div class="logo-item"><img src="https://cdn.simpleicons.org/tailwindcss/fafafa" alt="Tailwind CSS" class="h-5 w-5"/><span>Tailwind</span></div>
+        <div class="logo-item"><img src="https://cdn.simpleicons.org/supabase/fafafa" alt="Supabase" class="h-5 w-5"/><span>Supabase</span></div>
+        <div class="logo-item"><img src="https://cdn.simpleicons.org/postgresql/fafafa" alt="PostgreSQL" class="h-5 w-5"/><span>Postgres</span></div>
+        <div class="logo-item"><img src="https://cdn.simpleicons.org/vercel/fafafa" alt="Vercel" class="h-5 w-5"/><span>Vercel</span></div>
+        <div class="logo-item"><img src="https://cdn.simpleicons.org/github/fafafa" alt="GitHub" class="h-5 w-5"/><span>GitHub</span></div>
+        <div class="logo-item"><img src="https://cdn.simpleicons.org/figma/fafafa" alt="Figma" class="h-5 w-5"/><span>Figma</span></div>
+        <!-- Duplicate set for seamless loop -->
+        <div class="logo-item" aria-hidden="true"><img src="https://cdn.simpleicons.org/typescript/fafafa" alt="" class="h-5 w-5"/><span>TypeScript</span></div>
+        <div class="logo-item" aria-hidden="true"><img src="https://cdn.simpleicons.org/react/fafafa" alt="" class="h-5 w-5"/><span>React</span></div>
+        <div class="logo-item" aria-hidden="true"><img src="https://cdn.simpleicons.org/nextdotjs/fafafa" alt="" class="h-5 w-5"/><span>Next.js</span></div>
+        <div class="logo-item" aria-hidden="true"><img src="https://cdn.simpleicons.org/python/fafafa" alt="" class="h-5 w-5"/><span>Python</span></div>
+        <div class="logo-item" aria-hidden="true"><img src="https://cdn.simpleicons.org/dotnet/fafafa" alt="" class="h-5 w-5"/><span>.NET</span></div>
+        <div class="logo-item" aria-hidden="true"><img src="https://cdn.simpleicons.org/amazonaws/fafafa" alt="" class="h-5 w-5"/><span>AWS</span></div>
+        <div class="logo-item" aria-hidden="true"><img src="https://cdn.simpleicons.org/tailwindcss/fafafa" alt="" class="h-5 w-5"/><span>Tailwind</span></div>
+        <div class="logo-item" aria-hidden="true"><img src="https://cdn.simpleicons.org/supabase/fafafa" alt="" class="h-5 w-5"/><span>Supabase</span></div>
+        <div class="logo-item" aria-hidden="true"><img src="https://cdn.simpleicons.org/postgresql/fafafa" alt="" class="h-5 w-5"/><span>Postgres</span></div>
+        <div class="logo-item" aria-hidden="true"><img src="https://cdn.simpleicons.org/vercel/fafafa" alt="" class="h-5 w-5"/><span>Vercel</span></div>
+        <div class="logo-item" aria-hidden="true"><img src="https://cdn.simpleicons.org/github/fafafa" alt="" class="h-5 w-5"/><span>GitHub</span></div>
+        <div class="logo-item" aria-hidden="true"><img src="https://cdn.simpleicons.org/figma/fafafa" alt="" class="h-5 w-5"/><span>Figma</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="hr"></div>
+</section>
+
+<!-- ============ ABOUT / EXTENSIBLE ============ -->
+<section class="relative overflow-hidden">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12 py-[120px]">
+    <div class="text-center max-w-[640px] mx-auto">
+      <div class="tag justify-center">
+        <span class="arrow"></span>
+        <span style="font-family:'Instrument Serif',serif; font-style:italic; font-size:15px; color:#fafafa;">Built with intent</span>
+      </div>
+      <h2 class="display mt-6 text-[44px] md:text-[64px] leading-[1.0]">
+        Designed for clarity.<br/>Built for scale.
+      </h2>
+      <p class="mt-5 text-[15px] leading-[1.7] text-normal max-w-[480px] mx-auto">
+        I work across the stack — modern web, .NET services, and the AI plumbing in between.
+        Equal parts engineer and designer, with a bias for taste and reliability.
+      </p>
+    </div>
+
+    <!-- Orbital Timeline -->
+    <div id="orbital-root" class="relative mt-16 mx-auto" style="width:100%;max-width:920px;height:540px;overflow:visible;"></div>
+  </div>
+  <div class="hr"></div>
+</section>
+
+<script>
+(function() {
+  var ICONS = {
+    monitor: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+    server:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>',
+    zap:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+    cloud:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>',
+    db:      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>',
+    layers:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>'
+  };
+
+  var data = [
+    { id:1, title:"Frontend",       date:"React · Next.js · TS",     content:"Fast, accessible interfaces with Next.js, TypeScript, and Tailwind — from component system to production.",     relatedIds:[2,6], status:"completed",   energy:95, icon:"monitor" },
+    { id:2, title:"Backend",        date:".NET · Python · Node",      content:"APIs and business logic in ASP.NET Core, Flask, and Node.js — with strongly typed schemas at every layer.",      relatedIds:[1,3,5], status:"completed",   energy:90, icon:"server"  },
+    { id:3, title:"AI / LLMs",      date:"Gemini · AWS AI",           content:"Real-time AI assistants using Gemini API, AWS Transcribe and Polly — voice, text, and contextual retrieval.",    relatedIds:[2,4], status:"in-progress", energy:78, icon:"zap"     },
+    { id:4, title:"Cloud",          date:"AWS · Vercel · Supabase",   content:"Shipping and scaling across AWS, Vercel, and Supabase — auth, storage, edge functions, and CI all wired up.",    relatedIds:[2,3], status:"completed",   energy:85, icon:"cloud"   },
+    { id:5, title:"Data & SQL",     date:"SQL Server · Postgres",     content:"Optimised query design, schema architecture, and live aggregations — surface insights without killing perf.",    relatedIds:[1,2], status:"completed",   energy:88, icon:"db"      },
+    { id:6, title:"Design Systems", date:"Figma · Tailwind",          content:"Component libraries, spacing tokens, and design-to-code pipelines — consistency enforced at the source level.",  relatedIds:[1],   status:"completed",   energy:80, icon:"layers"  }
+  ];
+
+  var RADIUS = 180;
+  var CY = 270;
+  var rotAngle = 0;
+  var autoRot = true;
+  var expandedId = null;
+  var pulseSet = {};
+  var timer = null;
+
+  function statusStyle(s) {
+    if (s === 'completed')   return 'background:#fff;color:#000;border-color:#fff';
+    if (s === 'in-progress') return 'background:#000;color:#fff;border-color:#fff';
+    return 'background:rgba(0,0,0,0.4);color:#fff;border-color:rgba(255,255,255,0.5)';
+  }
+  function statusLabel(s) {
+    if (s === 'completed')   return 'COMPLETE';
+    if (s === 'in-progress') return 'IN PROGRESS';
+    return 'PENDING';
+  }
+
+  function init() {
+    var root = document.getElementById('orbital-root');
+    if (!root) return;
+
+    var style = document.createElement('style');
+    style.textContent = [
+      '#orbital-root{position:relative;}',
+      '.on{position:absolute;cursor:pointer;transform-origin:center;transition:opacity .7s ease;}',
+      '.oc{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#0a0a0a;color:#fff;border:2px solid rgba(255,255,255,0.38);transition:all .3s ease;position:relative;z-index:1;box-sizing:border-box;}',
+      '.oc.ex{background:#fff!important;color:#000!important;border-color:#fff!important;transform:scale(1.5);box-shadow:0 0 24px rgba(255,255,255,0.28);}',
+      '.oc.rl{background:rgba(255,255,255,0.45)!important;color:#000!important;border-color:#fff!important;}',
+      '@keyframes op{0%,100%{opacity:1}50%{opacity:.45}}.oc.pl{animation:op 1s ease infinite;border-color:#fff!important;background:rgba(255,255,255,0.45)!important;color:#000!important;}',
+      '.ol{position:absolute;top:46px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:10px;font-weight:600;letter-spacing:.07em;color:rgba(255,255,255,.65);text-transform:uppercase;transition:all .3s ease;font-family:\'Geist\',sans-serif;}',
+      '.ol.ex{color:#fff;transform:translateX(-50%) scale(1.18);}',
+      '.oer{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(255,255,255,.18) 0%,rgba(255,255,255,0) 70%);}',
+      '.ocard{position:absolute;top:58px;left:50%;transform:translateX(-50%);width:232px;background:rgba(0,0,0,.93);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:14px;z-index:500;backdrop-filter:blur(18px);box-shadow:0 24px 60px rgba(0,0,0,.85),0 0 20px rgba(255,255,255,.06);font-family:\'Geist\',sans-serif;}',
+      '@keyframes cin{from{opacity:0;transform:translateX(-50%) translateY(7px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}.ocard{animation:cin .22s cubic-bezier(.2,.7,.2,1) forwards;}',
+      '.ocard::before{content:\'\';position:absolute;bottom:100%;left:50%;transform:translateX(-50%);width:1px;height:11px;background:rgba(255,255,255,.35);}',
+      '.orbt{width:100%;height:100%;border-radius:50%;border:1px solid rgba(255,255,255,.1);position:absolute;top:0;left:0;pointer-events:none;}',
+      '@keyframes pp{0%,100%{opacity:1}50%{opacity:.5}}',
+      '@keyframes pg{75%,100%{transform:scale(2);opacity:0}}',
+      '.orbpulse{animation:pp 2s ease infinite;}',
+      '.orbping1{position:absolute;width:80px;height:80px;border-radius:50%;border:1px solid rgba(255,255,255,.22);top:50%;left:50%;transform:translate(-50%,-50%);animation:pg 1.5s ease-out infinite;}',
+      '.orbping2{position:absolute;width:96px;height:96px;border-radius:50%;border:1px solid rgba(255,255,255,.12);top:50%;left:50%;transform:translate(-50%,-50%);animation:pg 1.5s ease-out infinite;animation-delay:.5s;}',
+      '.ocrbtn{display:inline-flex;align-items:center;padding:3px 8px;font-size:11px;border:1px solid rgba(255,255,255,.22);border-radius:4px;color:rgba(255,255,255,.8);background:transparent;cursor:pointer;margin:0 3px 4px 0;transition:background .2s;font-family:\'Geist\',sans-serif;}',
+      '.ocrbtn:hover{background:rgba(255,255,255,.1);color:#fff;}'
+    ].join('');
+    document.head.appendChild(style);
+
+    // Orbit ring
+    var ring = document.createElement('div');
+    ring.style.cssText = 'position:absolute;left:50%;top:'+CY+'px;transform:translate(-50%,-50%);width:'+(RADIUS*2)+'px;height:'+(RADIUS*2)+'px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);pointer-events:none;';
+    root.appendChild(ring);
+
+    // Center orb
+    var orbWrap = document.createElement('div');
+    orbWrap.style.cssText = 'position:absolute;left:50%;top:'+CY+'px;transform:translate(-50%,-50%);width:64px;height:64px;z-index:10;pointer-events:none;';
+    orbWrap.innerHTML = '<div class="orbpulse" style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#3b82f6,#14b8a6);display:flex;align-items:center;justify-content:center;position:relative;"><div class="orbping1"></div><div class="orbping2"></div><div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);"></div></div>';
+    root.appendChild(orbWrap);
+
+    // Nodes
+    data.forEach(function(item) {
+      var sz = item.energy * 0.5 + 40;
+      var off = (sz - 40) / 2;
+      var el = document.createElement('div');
+      el.className = 'on';
+      el.id = 'on-' + item.id;
+      el.innerHTML =
+        '<div class="oer" id="oe-'+item.id+'" style="width:'+sz+'px;height:'+sz+'px;left:'+-off+'px;top:'+-off+'px;"></div>' +
+        '<div class="oc" id="oc-'+item.id+'">'+ICONS[item.icon]+'</div>' +
+        '<div class="ol" id="ol-'+item.id+'">'+item.title+'</div>';
+      el.addEventListener('click', function(e){ e.stopPropagation(); toggle(item.id); });
+      root.appendChild(el);
+    });
+
+    // Click outside
+    root.addEventListener('click', function(e){
+      if (expandedId !== null && (e.target === root || e.target === ring)) {
+        toggle(expandedId);
+      }
+    });
+    document.addEventListener('click', function(e){
+      if (expandedId !== null && !root.contains(e.target)) {
+        toggle(expandedId);
+      }
+    });
+
+    updatePos();
+    startRot();
+  }
+
+  function cx() {
+    var root = document.getElementById('orbital-root');
+    return root ? root.offsetWidth / 2 : 460;
+  }
+
+  function calcPos(index) {
+    var total = data.length;
+    var deg = ((index / total) * 360 + rotAngle) % 360;
+    var rad = deg * Math.PI / 180;
+    var x = cx() + RADIUS * Math.cos(rad);
+    var y = CY  + RADIUS * Math.sin(rad);
+    var zi = Math.round(100 + 50 * Math.cos(rad));
+    var op = 1;
+    return { x: x, y: y, zi: zi, op: op };
+  }
+
+  function updatePos() {
+    data.forEach(function(item, i) {
+      var el = document.getElementById('on-' + item.id);
+      if (!el) return;
+      var p = calcPos(i);
+      var isExp = expandedId === item.id;
+      el.style.transform = 'translate('+(p.x-20)+'px,'+(p.y-20)+'px)';
+      el.style.zIndex = isExp ? '200' : p.zi;
+      el.style.opacity = isExp ? '1' : p.op;
+    });
+  }
+
+  function toggle(id) {
+    var root = document.getElementById('orbital-root');
+    if (expandedId === id) {
+      // collapse
+      expandedId = null;
+      autoRot = true;
+      pulseSet = {};
+      root.querySelectorAll('.ocard').forEach(function(c){ c.remove(); });
+      data.forEach(function(d){
+        var c = document.getElementById('oc-'+d.id);
+        var l = document.getElementById('ol-'+d.id);
+        if (c) c.className = 'oc';
+        if (l) l.className = 'ol';
+      });
+      startRot();
+    } else {
+      expandedId = id;
+      autoRot = false;
+      stopRot();
+      root.querySelectorAll('.ocard').forEach(function(c){ c.remove(); });
+
+      var item = data.find(function(d){ return d.id === id; });
+      pulseSet = {};
+      item.relatedIds.forEach(function(rid){ pulseSet[rid] = true; });
+
+      data.forEach(function(d){
+        var c = document.getElementById('oc-'+d.id);
+        var l = document.getElementById('ol-'+d.id);
+        if (!c||!l) return;
+        c.className = 'oc';
+        l.className = 'ol';
+        if (d.id === id) { c.classList.add('ex'); l.classList.add('ex'); }
+        else if (pulseSet[d.id]) { c.classList.add('pl'); }
+      });
+
+      // Build card
+      var nodeEl = document.getElementById('on-'+id);
+      var relHtml = '';
+      if (item.relatedIds.length) {
+        var btns = item.relatedIds.map(function(rid){
+          var rel = data.find(function(d){ return d.id===rid; });
+          return '<button class="ocrbtn" data-id="'+rid+'">'+rel.title+' →</button>';
+        }).join('');
+        relHtml = '<div style="margin-top:12px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);"><div style="font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px;">Connected</div>'+btns+'</div>';
+      }
+
+      var card = document.createElement('div');
+      card.className = 'ocard';
+      card.innerHTML =
+        '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:7px;">' +
+          '<span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.08em;border:1px solid;'+statusStyle(item.status)+'">'+statusLabel(item.status)+'</span>' +
+          '<span style="font-size:10px;font-family:monospace;color:rgba(255,255,255,.38);">'+item.date+'</span>' +
+        '</div>' +
+        '<div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:8px;">'+item.title+'</div>' +
+        '<div style="font-size:12px;line-height:1.65;color:rgba(255,255,255,.75);">'+item.content+'</div>' +
+        '<div style="margin-top:13px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);">' +
+          '<div style="font-size:10px;color:rgba(255,255,255,.45);display:flex;justify-content:space-between;margin-bottom:5px;"><span>⚡ Energy</span><span>'+item.energy+'%</span></div>' +
+          '<div style="height:3px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;"><div style="height:100%;width:'+item.energy+'%;background:linear-gradient(90deg,rgba(255,255,255,.5),rgba(255,255,255,.9));border-radius:99px;"></div></div>' +
+        '</div>' +
+        relHtml;
+
+      card.querySelectorAll('.ocrbtn').forEach(function(btn){
+        btn.addEventListener('click', function(e){ e.stopPropagation(); toggle(parseInt(btn.dataset.id)); });
+      });
+
+      nodeEl.appendChild(card);
+    }
+  }
+
+  function startRot() {
+    stopRot();
+    timer = setInterval(function(){
+      rotAngle = (rotAngle + 0.28) % 360;
+      updatePos();
+    }, 50);
+  }
+  function stopRot() { if (timer) { clearInterval(timer); timer = null; } }
+
+  // Wait for fonts/layout
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    setTimeout(init, 0);
+  }
+})();
+</script>
+
+<!-- ============ EXPERIENCE GRID ============ -->
+<section class="relative" id="work">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12 py-[120px]">
+    <div class="text-center max-w-[680px] mx-auto">
+      <div class="tag justify-center">
+        <span class="arrow"></span>
+        <span style="font-family:'Instrument Serif',serif; font-style:italic; font-size:15px; color:#fafafa;">Experience</span>
+      </div>
+      <h2 class="display mt-6 text-[40px] md:text-[56px] leading-[1.0]">
+        Shipped in production.<br/>From intern to lead.
+      </h2>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-3">
+      <!-- Norsco -->
+      <div class="card lift">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="skill-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.5"/></svg></div>
+            <span class="text-[12px] text-loud">Norsco Consulting</span>
+          </div>
+          <span class="text-[10px] font-mono text-muted">'26</span>
+        </div>
+        <h3 class="display text-[22px] mt-7 leading-[1.05]">.NET Full-Stack Developer</h3>
+        <p class="mt-3 text-[13px] leading-[1.65] text-normal">
+          Real-time admin dashboard for EMA Fintech in C#, ASP.NET Core, and Blazor — visualizing live donation data for a Canadian nonprofit SaaS.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-1.5">
+          <span class="pill !py-1 !px-2.5 text-[10px]">C#</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">Blazor</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">SQL Server</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">Chart.js</span>
+        </div>
+      </div>
+
+      <!-- Brand Love -->
+      <div class="card lift">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="skill-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+            <span class="text-[12px] text-loud">Brand Love Inc.</span>
+          </div>
+          <span class="text-[10px] font-mono text-muted">'26</span>
+        </div>
+        <h3 class="display text-[22px] mt-7 leading-[1.05]">Full-Stack &amp; UX Lead</h3>
+        <p class="mt-3 text-[13px] leading-[1.65] text-normal">
+          Built ContinuityOS — an executive dashboard aggregating ClickUp, Vapi, and Apollo, with an LLM that translates metrics into plain-English insights.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-1.5">
+          <span class="pill !py-1 !px-2.5 text-[10px]">Next.js</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">Tailwind</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">Supabase</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">LLMs</span>
+        </div>
+      </div>
+
+      <!-- Wouessi -->
+      <div class="card lift">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="skill-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18" stroke="currentColor" stroke-width="1.2"/></svg></div>
+            <span class="text-[12px] text-loud">Wouessi Digital</span>
+          </div>
+          <span class="text-[10px] font-mono text-muted">'25</span>
+        </div>
+        <h3 class="display text-[22px] mt-7 leading-[1.05]">Software Engineering Intern</h3>
+        <p class="mt-3 text-[13px] leading-[1.65] text-normal">
+          Web onboarding form for new hires in React with Java/Python backend handling account setup, permissions, and tool access — reducing manual coordination.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-1.5">
+          <span class="pill !py-1 !px-2.5 text-[10px]">React</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">Java</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">Python</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">Agile</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="hr"></div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="relative" id="projects">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12 py-[120px]">
+    <div class="text-center max-w-[680px] mx-auto">
+      <div class="tag justify-center">
+        <span class="arrow"></span>
+        <span style="font-family:'Instrument Serif',serif; font-style:italic; font-size:15px; color:#fafafa;">Projects</span>
+      </div>
+      <h2 class="display mt-6 text-[40px] md:text-[56px] leading-[1.0]">
+        Built for the love of it.<br/>Shipped on my own time.
+      </h2>
+      <p class="mt-5 text-[15px] leading-[1.7] text-normal max-w-[480px] mx-auto">
+        Self-directed work where I get to pick the stack, the scope, and the standards.
+      </p>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div class="card lift">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="skill-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+            <span class="text-[12px] text-loud">Healthcare · 2025</span>
+          </div>
+        </div>
+        <h3 class="display text-[22px] mt-7 leading-[1.05]">HealthCare Management System</h3>
+        <p class="mt-3 text-[13px] leading-[1.65] text-normal">
+          Full-stack appointment platform with patient registration, scheduling, and admin control. Twilio SMS confirmations cut no-show rates and improved trust.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-1.5">
+          <span class="pill !py-1 !px-2.5 text-[10px]">Next.js</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">TypeScript</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">Appwrite</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">Twilio</span>
+        </div>
+      </div>
+
+      <div class="card lift">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="skill-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 18l4-4 3 3 5-6 6 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <span class="text-[12px] text-loud">Quant · 2025</span>
+          </div>
+        </div>
+        <h3 class="display text-[22px] mt-7 leading-[1.05]">S&amp;P 500 Market Predictor</h3>
+        <p class="mt-3 text-[13px] leading-[1.65] text-normal">
+          Time-series forecasting model in scikit-learn and yfinance reaching 72% accuracy on historical data. Custom backtesting engine simulates real-world trading.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-1.5">
+          <span class="pill !py-1 !px-2.5 text-[10px]">Python</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">scikit-learn</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">pandas</span>
+        </div>
+      </div>
+
+      <div class="card lift">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="skill-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 4v8M8 16a4 4 0 008 0M5 10v3a7 7 0 0014 0v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><rect x="9" y="3" width="6" height="9" rx="3" stroke="currentColor" stroke-width="1.5"/></svg></div>
+            <span class="text-[12px] text-loud">AI · 2024</span>
+          </div>
+        </div>
+        <h3 class="display text-[22px] mt-7 leading-[1.05]">AI Therapist</h3>
+        <p class="mt-3 text-[13px] leading-[1.65] text-normal">
+          Real-time mental-health assistant with voice and text — Gemini API, AWS Transcribe and Polly — hitting 95%+ speech-to-text accuracy.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-1.5">
+          <span class="pill !py-1 !px-2.5 text-[10px]">Next.js</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">Flask</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">AWS</span>
+          <span class="pill !py-1 !px-2.5 text-[10px]">Gemini</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hr"></div>
+</section>
+
+<!-- ============ STACK / FUTURE-PROOF ============ -->
+<section class="relative overflow-hidden" id="stack">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12 py-[120px]">
+    <div class="text-center max-w-[640px] mx-auto">
+      <div class="tag justify-center">
+        <span class="arrow"></span>
+        <span style="font-family:'Instrument Serif',serif; font-style:italic; font-size:15px; color:#fafafa;">The full stack</span>
+      </div>
+      <h2 class="display mt-6 text-[44px] md:text-[64px] leading-[1.0]">
+        One engineer,<br/>across the lifecycle.
+      </h2>
+      <p class="mt-5 text-[15px] leading-[1.7] text-normal max-w-[500px] mx-auto">
+        Comfortable from the database to the design file. Below is the kit I reach for when shipping production work — and the kit I'm steadily growing.
+      </p>
+    </div>
+
+    <!-- Tech grid in board style -->
+    <div class="relative mt-20 mx-auto max-w-[920px] h-[360px] circuit-bg rounded-[20px] border border-hairline overflow-hidden">
+      <!-- center board -->
+      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] h-[160px] rounded-[14px] border border-hairline-strong"
+           style="background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02)); backdrop-filter:blur(6px);">
+        <div class="h-full grid grid-cols-3 grid-rows-3 gap-1.5 p-3">
+          <div class="rounded-md" style="background:rgba(255,255,255,0.08)"></div>
+          <div class="rounded-md" style="background:linear-gradient(135deg,#ffffff,#fafafa);box-shadow:0 0 16px rgba(255,255,255,0.6);"></div>
+          <div class="rounded-md" style="background:rgba(255,255,255,0.08)"></div>
+          <div class="rounded-md" style="background:rgba(255,255,255,0.16)"></div>
+          <div class="rounded-md" style="background:rgba(255,255,255,0.06)"></div>
+          <div class="rounded-md" style="background:rgba(255,255,255,0.20)"></div>
+          <div class="rounded-md" style="background:rgba(255,255,255,0.10)"></div>
+          <div class="rounded-md" style="background:rgba(255,255,255,0.14)"></div>
+          <div class="rounded-md" style="background:rgba(255,255,255,0.08)"></div>
+        </div>
+      </div>
+
+      <!-- chips around -->
+      <div class="absolute left-[5%] top-[14%] node">Java · Python · C#</div>
+      <div class="absolute left-[8%] top-[44%] node">Next.js · React · Vue</div>
+      <div class="absolute left-[5%] bottom-[14%] node">SQL Server · Postgres</div>
+      <div class="absolute right-[5%] top-[14%] node">.NET · ASP.NET Core</div>
+      <div class="absolute right-[8%] top-[44%] node">Flask · Node.js</div>
+      <div class="absolute right-[5%] bottom-[14%] node">AWS · Vercel · Supabase</div>
+    </div>
+
+    <div class="text-center mt-12">
+      <a href="https://github.com/abdullahk416" target="_blank" rel="noopener" class="ghost">
+        See the full GitHub
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="hr"></div>
+</section>
+
+<!-- ============ HIGHLIGHT QUOTES ============ -->
+<section class="relative" id="highlights">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12 py-[120px]">
+    <div class="max-w-[640px] mx-auto">
+      <div class="tag justify-center">
+        <span class="arrow"></span>
+        <span style="font-family:'Instrument Serif',serif; font-style:italic; font-size:15px; color:#fafafa;">Feedback</span>
+      </div>
+      <h2 class="display mt-6 text-[40px] md:text-[56px] leading-[1.0] text-center">
+        What people say.
+      </h2>
+    </div>
+
+    <div class="mt-14 max-w-[640px] mx-auto">
+      <div class="card !p-8">
+        <svg class="w-7 h-7 text-muted mb-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M11.192 15.757c0-.88-.23-1.618-.69-2.217-.326-.412-.768-.683-1.327-.812-.55-.128-1.07-.137-1.54-.028-.16-.95.1-1.956.76-3.022.66-1.065 1.515-1.867 2.558-2.403L9.373 5c-.8.396-1.56.898-2.26 1.505-.71.607-1.34 1.305-1.9 2.094s-.98 1.68-1.25 2.69-.346 2.04-.217 3.1c.168 1.4.62 2.52 1.356 3.35.735.84 1.652 1.26 2.748 1.26.965 0 1.766-.29 2.4-.878.628-.576.94-1.365.94-2.368l.002.003zm9.124 0c0-.88-.23-1.618-.69-2.217-.326-.42-.77-.692-1.327-.817-.56-.124-1.074-.13-1.54-.022-.16-.94.09-1.95.75-3.02.66-1.06 1.514-1.86 2.557-2.4L18.49 5c-.8.396-1.555.898-2.26 1.505-.708.607-1.34 1.305-1.894 2.094-.556.79-.97 1.68-1.24 2.69-.273 1.01-.345 2.04-.217 3.1.168 1.4.62 2.52 1.356 3.35.735.84 1.652 1.26 2.748 1.26.965 0 1.766-.29 2.4-.878.628-.576.94-1.365.94-2.368l.002.003z"/>
+        </svg>
+        <p class="text-[17px] leading-[1.75] text-normal">
+          Abdullah is a talented individual. He works well in a team setting and is willing to collaborate to find solutions. He is extremely skilled and knowledgeable.
+        </p>
+        <div class="mt-7 flex items-center gap-4 pt-6 border-t border-hairline">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-[13px] font-medium text-loud" style="background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.15);">TM</div>
+          <div>
+            <div class="text-[13px] font-medium text-loud">Tara McIlroy</div>
+            <div class="text-[12px] text-muted">CEO &amp; Founder · Brand Love Inc. · Toronto, Ontario</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hr"></div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="relative" id="contact">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12 py-[120px]">
+    <div class="text-center max-w-[680px] mx-auto">
+      <h2 class="display text-[40px] md:text-[56px] leading-[1.0]">Let's build something.</h2>
+      <p class="mt-5 text-[15px] leading-[1.7] text-normal max-w-[480px] mx-auto">
+        Open to internships, contract work, and ambitious side projects. The fastest reply is by email.
+      </p>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-3 max-w-[920px] mx-auto">
+      <a href="mailto:abdullah.khan14@ontariotechu.net" class="card lift block">
+        <div class="flex items-center gap-2 text-muted text-[11px] font-mono uppercase tracking-[0.1em]">
+          <span class="w-1.5 h-1.5 rounded-full bg-azure" style="box-shadow:0 0 8px #fafafa"></span>
+          Direct line
+        </div>
+        <h3 class="display text-[28px] mt-8 leading-[1.0]">Email me</h3>
+        <p class="text-[13px] text-normal mt-2">abdullah.khan14@ontariotechu.net</p>
+        <div class="mt-7 flex items-center justify-between">
+          <span class="text-[12px] text-muted">Usually within a day.</span>
+          <span class="ghost !py-1 !px-3 text-[11px]">Compose →</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/abdullahk416" target="_blank" rel="noopener" class="card lift block">
+        <div class="flex items-center gap-2 text-muted text-[11px] font-mono uppercase tracking-[0.1em]">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.04 1.53 1.04.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z" fill="currentColor"/></svg>
+          Source
+        </div>
+        <h3 class="display text-[28px] mt-8 leading-[1.0]">GitHub</h3>
+        <p class="text-[13px] text-normal mt-2">github.com/abdullahk416</p>
+        <div class="mt-7 flex items-center justify-between">
+          <span class="text-[12px] text-muted">Most projects, most experiments.</span>
+          <span class="ghost !py-1 !px-3 text-[11px]">View profile →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="relative pb-12">
+  <div class="hr mb-12"></div>
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex items-center gap-3 text-[12px] text-muted">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 20 L12 4 L21 20 Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M7.5 14 H16.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <span>© 2026 Abdullah Khan</span>
+      <span class="text-dim">·</span>
+      <span>Toronto, Canada</span>
+    </div>
+
+    <div class="flex items-center gap-5 text-[12px] text-muted">
+      <a href="https://linkedin.com/in/abdvllah-khan" target="_blank" rel="noopener" class="hover:text-loud transition-colors duration-200">LinkedIn</a>
+      <a href="https://github.com/abdullahk416" target="_blank" rel="noopener" class="hover:text-loud transition-colors duration-200">GitHub</a>
+      <a href="mailto:abdullah.khan14@ontariotechu.net" class="hover:text-loud transition-colors duration-200">Email</a>
+      <div class="switch" aria-hidden="true"><span class="knob"></span></div>
+    </div>
+  </div>
+  <div class="floor-glow"></div>
+</footer>
+
+</body>
+</html>
