@@ -23,11 +23,11 @@ export function Nav() {
       <nav className="mx-auto flex h-[72px] w-full max-w-7xl items-center justify-between px-6 lg:px-12">
         <Link href="/" className="flex items-center gap-2 text-white">
           <Image
-            src="/initials_logo.webp"
+            src="/logo.png"
             alt="Abdullah Khan"
-            width={24}
-            height={24}
-            className="h-6 w-6 rounded-sm object-contain"
+            width={48}
+            height={36}
+            className="h-9 w-auto object-contain invert"
             priority
           />
           <span className="text-[14px] font-medium tracking-[-0.01em]">Abdullah Khan</span>

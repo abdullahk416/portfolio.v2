@@ -1,128 +1,206 @@
 # Abdullah Khan — Portfolio
 
-A modern, performant portfolio website showcasing software engineering expertise, projects, and technical skills. Built with cutting-edge web technologies and focused on clean design, smooth animations, and excellent user experience.
+A high-craft personal portfolio site for **Abdullah Khan**, software engineer based in Toronto. Built with Next.js 15, React 19, TypeScript, Tailwind CSS, and Framer Motion. Designed dark-first with a neutral white-on-near-black palette, cursor-aware 3D card effects, and an animated landing experience.
+
+> Live locally at `http://localhost:3000` after running `npm run dev`.
 
 ---
 
-## 🎯 Features
+## Highlights
 
-- **Responsive Design** — Mobile-first approach with seamless experience across all devices
-- **Smooth Animations** — GPU-accelerated transitions using Framer Motion for polished interactions
-- **Dynamic Components** — Interactive hero, radial timeline, holographic cards, and infinite logo marquee
-- **Dark Mode** — Dark-first design with optimized contrast and accessibility
-- **TypeScript** — Full type safety and improved developer experience
-- **SEO Optimized** — Meta tags, structured data, and Next.js built-in optimizations
-- **Performance Focused** — Next.js image optimization, code splitting, and production builds
+- **Animated hero** — atmospheric SVG grid, mouse-following blur gradient, click ripples, word-by-word reveal of name → subtitle → CTAs → top/bottom labels
+- **Logo marquee** — infinite horizontal scroll of the tech stack via Framer Motion, pauses on hover, fades at the edges
+- **Radial orbital timeline** — six skill nodes orbiting a glowing center; click any node to expand its detail card (status badge, content, energy bar, connected nodes)
+- **Holographic cards** — every content card uses a custom `HolographicCard` wrapper that tracks the cursor for subtle 3D tilt, soft white spotlight, and a `mix-blend-mode: overlay` holo shine
+- **Bento stack section** — colSpan-driven 3-col layout for the technology breakdown
+- **Real testimonial card** with avatar and proper opening/closing quotation marks
+- **Two CTAs** — Email me + LinkedIn — each rendered as a holographic card
+- **shadcn-style theming** — proper CSS variables in `globals.css`, easily themable
 
 ---
 
-## 🏗️ Project Structure
+## Tech Stack
+
+| Layer | Tool |
+|-------|------|
+| Framework | Next.js 15.1 (App Router) |
+| Language | TypeScript 5.7 (strict) |
+| Runtime | React 19 |
+| Styling | Tailwind CSS 3.4 + `tailwindcss-animate` |
+| UI primitives | `@radix-ui/react-slot`, `class-variance-authority`, `clsx`, `tailwind-merge` |
+| Animation | Framer Motion 11 (marquee), CSS keyframes (hero) |
+| Icons | `lucide-react` |
+| Fonts | Geist Sans + Geist Mono (`geist`), Instrument Serif (`next/font/google`) |
+| Image optimisation | `next/image` |
+
+---
+
+## Project Structure
 
 ```
-portfolio/
+Portfolio/
 ├── app/
-│   ├── layout.tsx           # Root layout with metadata and font setup
-│   ├── page.tsx             # Main portfolio page composition
-│   └── globals.css          # Global styles and Tailwind imports
+│   ├── layout.tsx               # Root layout: fonts, metadata
+│   ├── page.tsx                 # Section composition
+│   ├── globals.css              # CSS variables, keyframes, holographic CSS
+│   └── icon.png                 # Favicon (auto-detected)
 ├── components/
-│   ├── Hero.tsx             # Hero section with gradient effects
-│   ├── About.tsx            # About section with timeline visualization
-│   ├── Experience.tsx       # Skills and experience showcase
-│   ├── Projects.tsx         # Featured projects display
-│   ├── Stack.tsx            # Technology stack showcase
-│   ├── Feedback.tsx         # Testimonials and social proof
-│   ├── CTA.tsx              # Call-to-action section
-│   ├── Nav.tsx              # Navigation component
-│   ├── Footer.tsx           # Footer with links
-│   └── ui/                  # Reusable UI components
-│       ├── button.tsx
-│       ├── card.tsx
-│       ├── badge.tsx
-│       ├── holographic-card.tsx
-│       ├── bento-grid.tsx
-│       └── radial-orbital-timeline.tsx
-├── lib/
-│   └── utils.ts             # Utility functions
-├── public/                  # Static assets
-├── tailwind.config.ts       # Tailwind CSS configuration
-├── tsconfig.json            # TypeScript configuration
-└── package.json
+│   ├── Nav.tsx                  # Sticky nav with scroll-triggered backdrop blur
+│   ├── Hero.tsx                 # Animated landing
+│   ├── LogoMarquee.tsx          # Tech-stack carousel
+│   ├── About.tsx                # Built-with-intent + orbital timeline
+│   ├── Experience.tsx           # Norsco / Brand Love / Wouessi cards
+│   ├── Projects.tsx             # 3 personal project cards
+│   ├── Stack.tsx                # Bento grid of full stack
+│   ├── Feedback.tsx             # Tara McIlroy testimonial
+│   ├── CTA.tsx                  # Email + LinkedIn CTAs
+│   ├── Footer.tsx               # Copyright + social links
+│   └── ui/                      # Reusable primitives
+│       ├── button.tsx           # shadcn Button
+│       ├── badge.tsx            # shadcn Badge
+│       ├── card.tsx             # shadcn Card
+│       ├── holographic-card.tsx # 3D tilt + spotlight + shine wrapper
+│       ├── bento-grid.tsx       # Grid layout built on HolographicCard
+│       ├── infinite-slider.tsx  # Framer-motion horizontal marquee
+│       ├── logo-cloud.tsx       # Icon + label list using InfiniteSlider
+│       └── radial-orbital-timeline.tsx  # Orbital skill viz
+├── lib/utils.ts                 # `cn()` helper
+├── public/                      # Static assets
+│   ├── resume.pdf
+│   ├── logo.png                 # Cropped AK mark
+│   ├── initials_logo.webp       # Original AK source
+│   ├── norsco.png
+│   ├── brandloveinc_logo.jpeg
+│   ├── Wouessi_logo.jpeg
+│   └── tara.jpg
+├── tailwind.config.ts
+├── postcss.config.js
+├── next.config.ts
+└── tsconfig.json
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## Running Locally
 
-| Layer | Technology |
-|-------|-----------|
-| **Framework** | [Next.js 15](https://nextjs.org/) |
-| **Language** | [TypeScript 5](https://www.typescriptlang.org/) |
-| **Runtime** | [React 19](https://react.dev/) |
-| **Styling** | [Tailwind CSS 3](https://tailwindcss.com/) |
-| **Animations** | [Framer Motion](https://www.framer.com/motion/) |
-| **UI Components** | [Radix UI](https://www.radix-ui.com/), [Lucide Icons](https://lucide.dev/) |
-| **Fonts** | [Geist](https://vercel.com/font), [Instrument Serif](https://fonts.google.com/) |
-| **Build** | Webpack (via Next.js) |
+```bash
+git clone <repo>
+cd Portfolio
+npm install
+npm run dev
+```
 
+Visit `http://localhost:3000`.
 
----
+### Other scripts
 
-## 🎨 Design Highlights
-
-- **Custom Gradient System** — Dynamic mouse-tracked gradients in hero section
-- **Holographic Cards** — 3D card effects with light refraction simulation
-- **Radial Timeline** — Interactive orbital visualization of skills and experience
-- **Marquee Animation** — Infinite scrolling logo carousel with smooth looping
-- **Responsive Typography** — Instrument Serif and Geist font pairing with intentional hierarchy
-- **Accessibility First** — WCAG compliant with proper semantic HTML and ARIA labels
+```bash
+npm run build       # Production build
+npm run start       # Run the production server
+```
 
 ---
 
-## 📊 Performance
+## Design System
 
-Built with performance best practices:
-- **Code Splitting** — Automatic route-based and component-based code splitting
-- **Image Optimization** — Next.js automatic image optimization and lazy loading
-- **CSS-in-JS** — Tailwind CSS for minimal runtime overhead
-- **Font Optimization** — Local font files for faster loading
-- **Production Ready** — Minified, tree-shaken, and production-optimized builds
+The site is dark-first with a neutral palette — no blue tint. CSS variables in `app/globals.css`:
 
----
+| Token | Value | Purpose |
+|-------|-------|---------|
+| `--background` | `hsl(0 0% 4%)` | Page background (`#0a0a0a`) |
+| `--foreground` | `hsl(0 0% 98%)` | Primary text (`#fafafa`) |
+| `--card` | `hsl(0 0% 6%)` | Card surface |
+| `--border` | `hsl(0 0% 14%)` | Hairline borders |
+| `--muted-foreground` | `hsl(0 0% 63%)` | Secondary text |
+| `--primary` | `hsl(0 0% 98%)` | CTA bg (white) |
+| `--primary-foreground` | `hsl(0 0% 4%)` | CTA text (near-black) |
+| `--radius` | `0.75rem` | Base border radius |
 
-### TypeScript
+### Card pattern
 
-Configuration available in `tsconfig.json` with strict mode enabled.
+```tsx
+<HolographicCard className="rounded-xl border border-white/10 bg-white/[0.03] p-[22px]">
+  {/* content */}
+</HolographicCard>
+```
 
----
+### Heading gradient (subtle white → gray)
 
-## 📝 Content Customization
-
-To personalize the portfolio:
-
-1. **Update metadata** in `app/layout.tsx`
-2. **Edit sections** in `components/` directory
-3. **Modify projects** in `components/Projects.tsx`
-4. **Update experience** in `components/Experience.tsx`
-5. **Change colors** in `tailwind.config.ts` and component files
-
----
-
-## 📧 Contact
-
-- **Email** — [your-email@example.com]
-- **LinkedIn** — [linkedin.com/in/abdullahk416]
-- **GitHub** — [@abdullahk416](https://github.com/abdullahk416)
-
----
-
-## ✨ Acknowledgments
-
-- [Next.js](https://nextjs.org/) — React framework
-- [Vercel](https://vercel.com/) — Deployment platform
-- [Radix UI](https://www.radix-ui.com/) — Accessible components
-- [Framer Motion](https://www.framer.com/motion/) — Animation library
-- [Tailwind CSS](https://tailwindcss.com/) — Utility-first CSS framework
+```tsx
+<h2 style={{
+  background: "linear-gradient(180deg,#fff 0%,#a3a3a3 100%)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  backgroundClip: "text",
+}}>
+  …
+</h2>
+```
 
 ---
 
-**Built with ❤️ using modern web technologies.**
+## Adding External Image Hosts
+
+`next/image` requires hostname allowlisting in `next.config.ts`:
+
+```ts
+images: {
+  remotePatterns: [
+    { protocol: "https", hostname: "cdn.simpleicons.org" },
+    { protocol: "https", hostname: "cdn.jsdelivr.net" },
+    { protocol: "https", hostname: "placehold.co" },
+  ],
+}
+```
+
+Restart the dev server after adding hosts.
+
+---
+
+## Content Customisation
+
+| What | Where |
+|------|-------|
+| Page metadata, title, description | `app/layout.tsx` |
+| Hero text, subtitle, CTAs | `components/Hero.tsx` |
+| Tech logos in marquee | `components/LogoMarquee.tsx` (`logos` array) |
+| Skill timeline data | `components/About.tsx` (`timelineData` array) |
+| Experience cards | `components/Experience.tsx` (`experiences` array) |
+| Project cards | `components/Projects.tsx` (`projects` array) |
+| Bento stack groups | `components/Stack.tsx` (`stackItems` array) |
+| Testimonial | `components/Feedback.tsx` |
+| Contact CTAs (Email, LinkedIn) | `components/CTA.tsx` |
+| Footer links | `components/Footer.tsx` |
+| Favicon | replace `app/icon.png` |
+| Resume | replace `public/resume.pdf` |
+| AK logo (nav + footer) | replace `public/logo.png` |
+| Color tokens | `app/globals.css` `:root` block |
+
+---
+
+## Deployment
+
+The site is Vercel-ready. Push to GitHub and import the repo at [vercel.com/new](https://vercel.com/new) — no environment variables required, no build configuration needed beyond defaults.
+
+```bash
+# Or via Vercel CLI:
+vercel --prod
+```
+
+---
+
+## Contact
+
+- Email — `abdullah.khan14@ontariotechu.net`
+- LinkedIn — [linkedin.com/in/abdvllah-khan](https://linkedin.com/in/abdvllah-khan)
+- GitHub — [github.com/abdullahk416](https://github.com/abdullahk416)
+
+---
+
+## Acknowledgements
+
+- [21st.dev](https://21st.dev) — source patterns for the hero, logo cloud, radial orbital timeline, holographic card, and bento grid
+- [shadcn/ui](https://ui.shadcn.com) — Button, Badge, Card primitives + theming convention
+- [Geist](https://vercel.com/font) — typeface by Vercel
+- [Lucide](https://lucide.dev) — icon set
+- [Simple Icons](https://simpleicons.org) + [Devicon](https://devicon.dev) — brand mark CDNs for the logo marquee

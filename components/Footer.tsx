@@ -7,11 +7,11 @@ export function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 md:flex-row lg:px-12">
         <div className="flex items-center gap-3 text-[12px] text-white/40">
           <Image
-            src="/initials_logo.webp"
+            src="/logo.png"
             alt="Abdullah Khan"
-            width={18}
-            height={18}
-            className="h-[18px] w-[18px] rounded-sm object-contain opacity-60"
+            width={36}
+            height={22}
+            className="h-[22px] w-auto object-contain invert opacity-60"
           />
           <span>© 2026 Abdullah Khan</span>
           <span className="text-white/20">·</span>
