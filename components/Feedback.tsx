@@ -24,7 +24,7 @@ export function Feedback() {
           </h2>
         </div>
 
-        <div className="mt-14 mx-auto grid max-w-5xl gap-3 md:grid-cols-2 md:items-stretch">
+        <div className="mt-14 mx-auto grid max-w-6xl gap-3 md:grid-cols-3 md:items-stretch">
           <HolographicCard className="h-full rounded-xl border border-white/10 bg-white/[0.03] p-8">
             <div className="flex h-full flex-col">
               <span className="mb-5 block font-serif text-5xl leading-none text-white/30">&ldquo;</span>
@@ -72,6 +72,31 @@ export function Feedback() {
                 <div>
                   <div className="text-[13px] font-medium text-white">Diana Ng</div>
                   <div className="text-[12px] text-white/50">CEO &amp; Founder</div>
+                </div>
+              </div>
+            </div>
+          </HolographicCard>
+
+          <HolographicCard className="h-full rounded-xl border border-white/10 bg-white/[0.03] p-8">
+            <div className="flex h-full flex-col">
+              <span className="mb-5 block font-serif text-5xl leading-none text-white/30">&ldquo;</span>
+              <p className="text-[17px] leading-[1.75] text-white/78">
+                Abdullah is a strong developer with excellent knowledge of creating insightful
+                dashboards. It was great working with him and looking forward for more engagements
+                in the future.
+              </p>
+              <span className="mt-2 block text-right font-serif text-5xl leading-none text-white/30">&rdquo;</span>
+              <div className="mt-auto flex items-center gap-4 border-t border-white/10 pt-6">
+                <Image
+                  src="/pharma360.jpg"
+                  alt="Robert Boutros — Pharma 360"
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 rounded-full object-cover"
+                />
+                <div>
+                  <div className="text-[13px] font-medium text-white">Robert Boutros</div>
+                  <div className="text-[12px] text-white/50">Director · Pharma 360</div>
                 </div>
               </div>
             </div>
